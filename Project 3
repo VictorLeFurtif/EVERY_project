@@ -1,0 +1,235 @@
+#DIVERSES
+from tkinter import *
+import random
+import json
+import time
+
+with open("donnees_banque.json", "r") as f:
+    data = json.load(f)
+
+Liste = ["Williams", "Sy", "Diana", "Reeves", "Watson", "Zidane", \
+"Cranston", "Veil", "Rudd", "Rinner"]
+
+fenetre = Tk()
+fenetre.geometry("500x300")
+
+def quitt ():
+    fenetre.destroy()
+
+btnquit= Button(master=fenetre, text="Quitter", bg="red", width=5, height=1,command=quitt)
+btnquit.place(x=450, y=10)
+
+fenetre.mainloop()
+
+
+
+#FONCTIONS
+
+
+#fonction qui donne la date en format année/mois/jour
+def date ():
+    return time.strftime("%Y/%m/%d")
+
+#fonction qui informe le client lorsque son solde descend en dessous de 50 euros
+def seuil (client):
+    danger = 50
+    if float(data[client]["compte"]) < danger:
+        print ("Attention, il vous reste moins de 50 euros sur votre compte...")
+    else:
+        print ("Vous avez encore " + str(data[client]["compte"]) + " €")
+
+#fonction qui permet au client de choisir le billet qu'il désire obtenir en majorité
+def choix_billet (retrait):
+    billet = input ("Préférez-vous les billets: \n"\
+    "-de 10 euros, répondez 10 \n"\
+    "-ou de 20 euros, répondez 20 \n"\
+    "-ou de 50 euros, répondez 50 \n"\
+    "-ou de 100 euros, répondez 100 ? ")
+    liste = ["10", "20", "50", "100"]
+    if billet not in liste:
+        print ("Erreur sur la somme indiquée...")
+        billet = input ("Préférez-vous les billets: \n"\
+            "-de 10 euros, répondez 10 \n"\
+            "-ou de 20 euros, répondez 20 \n"\
+            "-ou de 50 euros, répondez 50 \n"\
+            "-ou de 100 euros, répondez 100 ? ")
+    elif billet in liste:
+        nombre_billet = int(float (retrait) // float (billet))
+        reste = int(float (retrait) % float (billet))
+        if reste != 0:
+            if reste < 10:
+                print ("Voici " + str(nombre_billet) + " billets de " + str(billet) + " euros et " + str(reste) \
+                + " pièces de 1 euro")
+            elif reste < 20:
+                reste = reste - 10
+                print ("Voici " + str(nombre_billet) + " billets de " + str(billet) + " euros et " \
+                + " 1 billet de 10 euros et " + str(reste) + " pièces de 1 euro")
+            elif reste < 30:
+                reste = reste - 20
+                print ("Voici " + str(nombre_billet) + " billets de " + billet + " euros et " + \
+                " 1 billet de 20 euros et " + str(reste) + " pièces de 1 euro")
+            elif reste < 40:
+                reste = reste - 30
+                print ("Voici " + str(nombre_billet) + " billets de " + str(billet) + " euros et " + \
+                " 1 billet de 20 euros, 1 billet de 10 euros et " \
+                    + str(reste) + "pièces de 1 euro")
+            elif reste < 50:
+                reste = reste - 40
+                print ("Voici " + str(nombre_billet) + " billets de " + str(billet) + " euros et " +\
+                 " 2 billet de 20 euros et " + str(reste) + " pièces de 1 euro")
+            elif reste < 60:
+                reste = reste - 50
+                print ("Voici " + str(nombre_billet) + " billets de " + str(billet) + " euros et " +\
+                 " 1 billet de 50 euros et " + str(reste) + "pièces de 1 euro")
+            elif reste < 70:
+                reste = reste - 60
+                print ("Voici " + str(nombre_billet) + " billets de " + str(billet) + " euros et " + \
+                " 1 billet de 50 euros, 1 billet de 10 euros et " \
+                    + str(reste) + " pièces de 1 euro")
+            elif reste < 80:
+                reste = reste - 70
+                print ("Voici " + str(nombre_billet) + " billets de " + billet + " euros et " +\
+                 " 1 billet de 50 euros, 1 billet de 20 euros et " \
+                    +reste + " pièces de 1 euro")
+            elif reste < 90:
+                reste = reste - 80
+                print ("Voici " + str(nombre_billet) + " billets de " + str(billet) + " euros et " + \
+                " 1 billet de 50 euros, 3 billet de 10 euros et " \
+                    + str(reste) + " pièces de 1 euro")
+            elif reste < 100:
+                reste = reste - 90
+                print ("Voici " + str(nombre_billet) + " billets de " + str(billet) + " euros et " + \
+                " 1 billet de 50 euros, 2 billet de 20 euros et " \
+                    + str(reste) + " pièces de 1 euro")
+        else:
+            print ("Voici " + str(nombre_billet) + " billets de " + str(billet) + " euros")
+
+#fonction qui permet de déposer de l'argent sur son compte
+def depot_solde (client):
+    depot = input ("Combien d'euros voulez-vous déposer : ")
+    list = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    for char in str (depot):
+        if char not in list:
+            print ("Erreur sur la somme indiquée...")
+            depot = input ("Combien d'euros voulez-vous déposer : ")
+        elif char in list:
+            data[client]["compte"] = float(str(data[client]["compte"])) + float (depot)
+            data[client]["historique"].append(date() +" depot de " + str(depot) + " euros")
+            print("Vous disposez maintenant de " + str(data[client]["compte"]) + " €")
+            break
+
+#fonction qui permet de retirer de l'argent de son compte,
+#lorsque le retrait est supérieur à 1000 euros, il faut confirmer le retrait pour éviter les erreurs
+#bien évidemment, si le retrait est supérieur au solde, le retrait ne sera pas effectué...
+def retrait_solde (client):
+    seuil (client)
+    retrait = input ("Combien d'euros voulez-vous récupérer : ")
+    list = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    for char in str (retrait):
+        if char not in list:
+            print ("Erreur sur la somme indiquée...")
+            retrait = input ("Combien d'euros voulez-vous récupérer : ")
+        elif char in list:
+            if float (retrait) > float(str(data[client]["compte"])):
+                print ("Votre compte ne dispose pas d'un solde suffisant...")
+                retrait = input ("Combien d'euros voulez-vous récupérer : ")
+
+            if float (retrait) > 1000:
+                question = input (" Confirmez votre retrait, oui ou non: ")
+                if question == "oui" :
+                    data[client]["compte"] = float (str(data[client]["compte"]))\
+                     - float (retrait)
+                    data[client]["historique"].append(date() +" retrait de " +\
+                     str(retrait) + " euros")
+                    choix_billet(retrait)
+                    print("Il vous reste maintenant " + str(data[client]) + " €")
+                    break
+                elif question == "non":
+                    question = "q"
+                    break
+            else:
+
+                data[client]["compte"] = float(str(data[client]["compte"])) \
+                - float (retrait)
+                data[client]["historique"].append(date() +" retrait de " +\
+                 str(retrait) + " euros")
+                choix_billet(retrait)
+                print("Il vous reste maintenant " + str(data[client]["compte"]) + " €")
+                break
+
+
+
+
+
+#corps principal: interactions avec l'utilisateur
+question = input ("Bienvenue à la Banque de France,\n"\
+ "tapez c pour continuer, q pour quitter quand vous le voulez... ")
+
+while question != "q":
+    client = input ("Quel est votre nom ? ")
+    if client != "q":
+        while client not in Liste:
+            print ("Erreur d'identifiant...")
+            client = input ("Quel est votre nom ? ")
+    if client in Liste:
+        motdepasse = input ("Quel est votre mot de passe : ")
+        mdp = client + "123"
+    elif client == "q":
+        question = "q"
+        break
+    while motdepasse != "q":
+        while motdepasse != mdp:
+            print ("Erreur de mot de passe...")
+            motdepasse = input ("Quel est votre mot de passe : ")
+            if motdepasse == "q":
+                break
+        break
+    if motdepasse == "q":
+        question = "q"
+        break
+    while motdepasse == mdp:
+        question = input ("Vous êtes sur le module CLIENT, \n"\
+        "Que voulez-vous faire: \n"\
+        "-retirer de l'argent, tapez r \n"\
+        "-déposer de l'argent, tapez d \n"\
+        "-voir votre historique, tapez h \n"\
+        "-passer au mode CONSEILLER BANQUAIRE, tapez b ")
+        if question == "r":
+            retrait_solde (client)
+        elif question == "d":
+            depot_solde (client)
+        elif question == "h":
+            print (data[client]["historique"])
+        elif question == "b":
+            code_valide = "conseiller456"
+            code = input ("Quel est le code secret ")
+            while code != "q":
+                if code != code_valide:
+                    print ("Erreur sur le code secret...")
+                    break
+                else:
+                    print ("Bienvenue cher conseiller")
+                    print (Liste)
+                    client = input ("Quel est le client vous intéresse ? ")
+                    if client not in Liste:
+                        print ("Erreur sur la saisie du client...")
+                    elif client in  Liste:
+                        print (data[client])
+                    break
+            if code == "q":
+                question = "q"
+                break
+        elif question == "q":
+            break
+        else:
+            print ("erreur de commandes...")
+if question == "q":
+    print ("Merci de votre passage,\n"\
+    "N'hésitez pas à nous contacter en cas de problème ou pour un renseignement")
+
+
+with open("donnees_banque.json", "w") as f:
+    json.dump(data, f, indent = 3)
+
+
+#FIN DU PROGRAMME PAR NATHAN, VICTOR ET HUGO
