@@ -1,0 +1,249 @@
+#on demande les informations nécessaires pour le fonctionnement du programme à l'utilisateur.
+nombre = str (input ("Donne moi un nombre en base 2, 10 ou 16 "))
+base = int(str (input ("Quelle est la base de ce nombre ?")))
+
+#on vérifie que son nombre est valable.
+accepter= []
+if base == 16:
+    acccepter= ["0","1", "2","3","4","5", "6", "7", "8", "9", "a" ,"b", "c", "d", "e","f"]
+elif base == 2:
+    accepter= ["0","1"]
+elif base == 10:
+    accepter=  ["0","1","2","3","4","5","6","7","8","9"]
+else:
+    print ("ERREUR pour la base")
+
+verifier = True
+for chiffre in str (nombre):
+    if chiffre not in accepter:
+        verifier = False
+    elif chiffre in accepter:
+        verifier = True
+
+#on répète cette boucle tant que le nombre de l'utilisateur n'est pas valable.
+while verifier == False:
+    nombre = str (input ("Votre nombre n'est pas valable, donne moi un nombre en base 2, 10 ou 16 "))
+    base = int(str (input ("Quelle est la base de ce nombre ?")))
+
+#on lui demande la nouvelle base une fois son nombre validé.
+nouvelle_base = int(str (input ("Dans quelle base voulez-vous transposer ce nombre ?")))
+
+#on définit la fonction décimale vers binaire.
+def my_bin (nombre):
+    binaire = ""
+    nombre = int(nombre)
+    while nombre > 0:
+        binaire = str(nombre%2) + binaire
+        nombre = nombre // 2
+    return binaire
+
+#on définit la fonction décimale vers hexadécimale.
+def my_hex (nombre):
+    nouveau_nombre = ""
+    characters_hexa = {"0" : "0", "1" : "1", "2" : "2", "3" : "3", "4" : "4", "5" : "5", "6" : "6",
+            "7" : "7", "8" : "8", "9" : "9", "10" : "a", "11" : "b", "12" : "c",
+            "13" : "d", "14" : "e", "15" : "f"}
+    nombre = int(nombre)
+    while nombre > 0:
+        nouveau_nombre = characters_hexa[str(nombre%16)] + nouveau_nombre
+        nombre = nombre // 16
+
+    return nouveau_nombre
+
+#on définit la fonction binaire vers décimale.
+def my_bin2(nombre):
+    nombre = list (nombre)
+    nombre.reverse()
+    i = 0
+    nouveau_nombre = 0
+    while i <= len (nombre)-1:
+        nouveau_nombre = nouveau_nombre + int (nombre [i]) * 2**i
+        i = i + 1
+    return nouveau_nombre
+
+#on définit la fonction hexadécimale vers décimale.
+def my_hex2 (nombre) :
+    nouveau_nombre = ""
+    characters_hexa = {"0" : "0", "1" : "1", "2" : "2", "3" : "3", "4" : "4", "5" : "5", "6" : "6",
+            "7" : "7", "8" : "8", "9" : "9", "a" : "10", "b" : "11", "c" : "12",
+            "d" : "13", "e" : "14", "f" : "15"}
+    nombre = list (nombre)
+    nombre.reverse()
+    i = 0
+    nouveau_nombre = 0
+    while i < len (nombre):
+        nouveau_nombre = nouveau_nombre + int (characters_hexa [nombre [i]]) * 16**i
+        i = i + 1
+
+    return nouveau_nombre
+
+#on utilise les fonctions en prenant en compte de la base d'origine et de la nouvelle base choisie pour calculer le nouveau chiffre.
+if base == 2 :
+    if nouvelle_base == 10 :
+        nouveau_nombre = my_bin2(nombre)
+    elif nouvelle_base == 2 :
+        print ("Erreur, veuillez choisir une autre base")
+    elif nouvelle_base == 16 :
+        x = my_bin2(nombre)
+        nouveau_nombre = my_hex(nombre)
+    else :
+        print ("La nouvelle base doit etre 10 ou 16")
+
+elif base == 10 :
+    if nouvelle_base == 10 :
+        print ("Erreur, veuillez choisir une autre base")
+    elif nouvelle_base == 2 :
+        nouveau_nombre = my_bin(nombre)
+    elif nouvelle_base == 16 :
+        nouveau_nombre = my_hex(nombre)
+    else :
+        print ("La nouvelle base doit etre 2 ou 16")
+
+elif base == 16 :
+    if nouvelle_base == 16 :
+        print ("Erreur, veuillez choisir une autre base")
+    elif nouvelle_base == 2 :
+        x = my_hex2(nombre)
+        nouveau_nombre = my_bin(nombre)
+    elif nouvelle_base == 10 :
+        nouveau_nombre = my_hex2(nombre)
+    else :
+        print ("La nouvelle base doit etre 2 ou 10")
+
+else :
+    print ("Nous ne traitons que les bases 2, 10 et 16 desole")
+
+#on affiche le résultat.
+print (nouveau_nombre)
+
+#le programme est fini, fait par Hugo Bardet et Victor Baz, 1ère11
+
+
+
+
+
+
+
+
+
+#on demande les informations nécessaires pour le fonctionnement du programme à l'utilisateur.
+    nombre = str (input ("Donne moi un nombre en base 2, 10 ou 16 "))
+    base = int(str (input ("Quelle est la base de ce nombre ?")))
+
+#on vérifie que son nombre est valable.
+z = 0
+while z < 10:
+    accepter= []
+    if base == 16:
+        acccepter= ["0","1", "2","3","4","5", "6", "7", "8", "9", "a" ,"b", "c", "d", "e","f"]
+    elif base == 2:
+        accepter= ["0","1"]
+    elif base == 10:
+        accepter=  ["0","1","2","3","4","5","6","7","8","9"]
+    else:
+        print ("ERREUR pour la base")
+
+    verifier = True
+    for chiffre in range(len ( list (nombre))):
+        if chiffre not in accepter:
+            verifier = False
+        elif chiffre in accepter:
+            verifier = True
+
+#on répète cette boucle tant que le nombre de l'utilisateur n'est pas valable.
+    if verifier == False:
+        nombre = str (input ("Votre nombre n'est pas valable, donne moi un nombre en base 2, 10 ou 16 "))
+        base = int(str (input ("Quelle est la base de ce nombre ?")))
+    continue
+#on lui demande la nouvelle base une fois son nombre validé.
+nouvelle_base = int(str (input ("Dans quelle base voulez-vous transposer ce nombre ?")))
+
+#on définit la fonction décimale vers binaire.
+def my_bin (nombre):
+    binaire = ""
+    nombre = int(nombre)
+    while nombre > 0:
+        binaire = str(nombre%2) + binaire
+        nombre = nombre // 2
+    return binaire
+
+#on définit la fonction décimale vers hexadécimale.
+def my_hex (nombre):
+    nouveau_nombre = ""
+    characters_hexa = {"0" : "0", "1" : "1", "2" : "2", "3" : "3", "4" : "4", "5" : "5", "6" : "6",
+            "7" : "7", "8" : "8", "9" : "9", "10" : "a", "11" : "b", "12" : "c",
+            "13" : "d", "14" : "e", "15" : "f"}
+    nombre = int(nombre)
+    while nombre > 0:
+        nouveau_nombre = characters_hexa[str(nombre%16)] + nouveau_nombre
+        nombre = nombre // 16
+
+    return nouveau_nombre
+
+#on définit la fonction binaire vers décimale.
+def my_bin2(nombre):
+    nombre = list (nombre)
+    nombre.reverse()
+    i = 0
+    nouveau_nombre = 0
+    while i <= len (nombre)-1:
+        nouveau_nombre = nouveau_nombre + int (nombre [i]) * 2**i
+        i = i + 1
+    return nouveau_nombre
+
+#on définit la fonction hexadécimale vers décimale.
+def my_hex2 (nombre) :
+    nouveau_nombre = ""
+    characters_hexa = {"0" : "0", "1" : "1", "2" : "2", "3" : "3", "4" : "4", "5" : "5", "6" : "6",
+            "7" : "7", "8" : "8", "9" : "9", "a" : "10", "b" : "11", "c" : "12",
+            "d" : "13", "e" : "14", "f" : "15"}
+    nombre = list (nombre)
+    nombre.reverse()
+    i = 0
+    nouveau_nombre = 0
+    while i < len (nombre):
+        nouveau_nombre = nouveau_nombre + int (characters_hexa [nombre [i]]) * 16**i
+        i = i + 1
+
+    return nouveau_nombre
+
+#on utilise les fonctions en prenant en compte de la base d'origine et de la nouvelle base choisie pour calculer le nouveau chiffre.
+if base == 2 :
+    if nouvelle_base == 10 :
+        nouveau_nombre = my_bin2(nombre)
+    elif nouvelle_base == 2 :
+        print ("Erreur, veuillez choisir une autre base")
+    elif nouvelle_base == 16 :
+        x = my_bin2(nombre)
+        nouveau_nombre = my_hex(nombre)
+    else :
+        print ("La nouvelle base doit etre 10 ou 16")
+
+elif base == 10 :
+    if nouvelle_base == 10 :
+        print ("Erreur, veuillez choisir une autre base")
+    elif nouvelle_base == 2 :
+        nouveau_nombre = my_bin(nombre)
+    elif nouvelle_base == 16 :
+        nouveau_nombre = my_hex(nombre)
+    else :
+        print ("La nouvelle base doit etre 2 ou 16")
+
+elif base == 16 :
+    if nouvelle_base == 16 :
+        print ("Erreur, veuillez choisir une autre base")
+    elif nouvelle_base == 2 :
+        x = my_hex2(nombre)
+        nouveau_nombre = my_bin(nombre)
+    elif nouvelle_base == 10 :
+        nouveau_nombre = my_hex2(nombre)
+    else :
+        print ("La nouvelle base doit etre 2 ou 10")
+
+else :
+    print ("Nous ne traitons que les bases 2, 10 et 16 desole")
+
+#on affiche le résultat.
+print (nouveau_nombre)
+
+#le programme est fini, fait par Hugo Bardet et Victor Baz, 1ère11
