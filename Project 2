@@ -1,0 +1,204 @@
+import random
+import statistics
+
+#on effectue d'abord une base de données à partir de dictionnaires dans lesquels
+#les notes sont générées aléatoirement
+
+dico_classe= \
+    {"Victor": \
+    { "maths" : random.sample(range(5, 20), 5), "fr":random.sample(range(4, 17), 5), "hist":random.sample(range(17, 20), 5) },\
+    "Nour" : \
+    {"maths" : random.sample(range(11, 18), 5), "fr":random.sample(range(12, 20), 5), "hist":random.sample(range(3, 15), 5)},\
+    "Alexandre": \
+    {"maths" : random.sample(range(6, 20), 5), "fr":random.sample(range(3, 20), 5), "hist":random.sample(range(10, 19), 5)},\
+    "Lina": \
+    {"maths" : random.sample(range(6, 20), 5), "fr":random.sample(range(5, 14), 5), "hist":random.sample(range(9, 17), 5)},\
+    "Guillaume": \
+    {"maths" : random.sample(range(3, 20), 5), "fr":random.sample(range(2, 15), 5), "hist":random.sample(range(3, 12), 5)},\
+    "Anna": \
+    {"maths" : random.sample(range(5, 12), 5), "fr":random.sample(range(1, 16), 5), "hist":random.sample(range(14, 20), 5)},\
+    "Daniel": \
+    {"maths" :random.sample(range(6, 18), 5), "fr":random.sample(range(7, 19), 5), "hist":random.sample(range(10, 17), 5)},\
+    "Louise": \
+    {"maths" : random.sample(range(9, 20), 5), "fr":random.sample(range(9, 15), 5), "hist":random.sample(range(3, 14), 5)},\
+    "Mathilde": \
+    {"maths" : random.sample(range(8, 17), 5), "fr":random.sample(range(3, 11), 5), "hist":random.sample(range(8, 20), 5)},\
+    "Claire": \
+    {"maths" : random.sample(range(7, 14), 5), "fr":random.sample(range(7, 20), 5), "hist":random.sample(range(0, 11), 5)}}
+
+
+#on calcule la moyenne de classe dans chaque matière ainsi que la moyenne générale
+
+
+moyenne_maths= (sum(dico_classe["Victor"]["maths"]) + sum(dico_classe["Nour"]["maths"])\
+ + sum(dico_classe["Alexandre"]["maths"])+ sum(dico_classe["Lina"]["maths"])+ sum(dico_classe["Guillaume"]["maths"])\
++ sum(dico_classe["Anna"]["maths"])+ sum(dico_classe["Daniel"]["maths"])+ sum(dico_classe\
+["Louise"]["maths"])+ sum(dico_classe["Mathilde"]["maths"])+ sum(dico_classe["Claire"]["maths"]))/50
+
+
+moyenne_fr= (sum(dico_classe["Victor"]["fr"]) + sum(dico_classe["Nour"]["fr"]) + \
+sum(dico_classe["Alexandre"]["fr"])+ sum(dico_classe["Lina"]["fr"])+ sum(dico_classe["Guillaume"]["fr"])\
++ sum(dico_classe["Anna"]["fr"])+ sum(dico_classe["Daniel"]["fr"])+ sum(dico_classe\
+["Louise"]["fr"])+ sum(dico_classe["Mathilde"]["fr"])+ sum(dico_classe["Claire"]["fr"]))/50
+
+moyenne_hist= (sum(dico_classe["Victor"]["hist"]) + sum(dico_classe["Nour"]["hist"]) \
++ sum(dico_classe["Alexandre"]["hist"])+ sum(dico_classe["Lina"]["hist"])+ sum(dico_classe["Guillaume"]["hist"])\
++ sum(dico_classe["Anna"]["hist"])+ sum(dico_classe["Daniel"]["hist"])+ sum(dico_classe\
+["Louise"]["hist"])+ sum(dico_classe["Mathilde"]["hist"])+ sum(dico_classe["Claire"]["hist"]))/50
+
+
+moyenne_g= ((moyenne_fr)+(moyenne_hist)+(moyenne_maths))/3
+
+#On calcule les moyennes des élèves
+
+moyenne_Victor1 = sum(dico_classe["Victor"]["maths"])/5
+moyenne_Victor2 = sum(dico_classe["Victor"]["fr"])/5
+moyenne_Victor3 = sum(dico_classe["Victor"]["hist"])/5
+
+moyenne_Nour1 = sum(dico_classe["Nour"]["maths"])/5
+moyenne_Nour2 = sum(dico_classe["Nour"]["fr"])/5
+moyenne_Nour3 = sum(dico_classe["Nour"]["hist"])/5
+
+moyenne_Alexandre1 = sum(dico_classe["Alexandre"]["maths"])/5
+moyenne_Alexandre2 = sum(dico_classe["Alexandre"]["fr"])/5
+moyenne_Alexandre3 = sum(dico_classe["Alexandre"]["hist"])/5
+
+moyenne_Lina1 = sum(dico_classe["Lina"]["maths"])/5
+moyenne_Lina2 = sum(dico_classe["Lina"]["fr"])/5
+moyenne_Lina3 = sum(dico_classe["Lina"]["hist"])/5
+
+moyenne_Guillaume1 = sum(dico_classe["Guillaume"]["maths"])/5
+moyenne_Guillaume2 = sum(dico_classe["Guillaume"]["fr"])/5
+moyenne_Guillaume3 = sum(dico_classe["Guillaume"]["hist"])/5
+
+moyenne_Anna1 = sum(dico_classe["Anna"]["maths"])/5
+moyenne_Anna2 = sum(dico_classe["Anna"]["fr"])/5
+moyenne_Anna3 = sum(dico_classe["Anna"]["hist"])/5
+
+moyenne_Daniel1 = sum(dico_classe["Daniel"]["maths"])/5
+moyenne_Daniel2 = sum(dico_classe["Daniel"]["fr"])/5
+moyenne_Daniel3 = sum(dico_classe["Daniel"]["hist"])/5
+
+moyenne_Louise1 = sum(dico_classe["Louise"]["maths"])/5
+moyenne_Louise2 = sum(dico_classe["Louise"]["fr"])/5
+moyenne_Louise3 = sum(dico_classe["Louise"]["hist"])/5
+
+moyenne_Mathilde1 = sum(dico_classe["Mathilde"]["maths"])/5
+moyenne_Mathilde2 = sum(dico_classe["Mathilde"]["fr"])/5
+moyenne_Mathilde3 = sum(dico_classe["Mathilde"]["hist"])/5
+
+moyenne_Claire1 = sum(dico_classe["Claire"]["maths"])/5
+moyenne_Claire2 = sum(dico_classe["Claire"]["fr"])/5
+moyenne_Claire3 = sum(dico_classe["Claire"]["hist"])/5
+
+
+#On s'occupe des interactions avec l'utilisateur en créant un menu d'interactions possibles
+#Celui-ci peut être quitté à tous moments
+
+question = input ("Tapez c pour continuer, si à un moment vous voulez quitter, tapez q: ")
+
+while question != "q":
+    question = input ("Que voulez-vous:\n"\
+    +"-tapez m pour la moyenne générale de classe\n"\
+    +"-tapez  a si vous voulez une moyenne concernant un élève\n"\
+    +"-tapez z si vous voulez les moyennes générales des élèves\n"\
+    +"-tapez b si vous voulez les moyennes de classe dans les matières\n"\
+    +"-tapez k si vous voulez le bulletin de la classe\n"\
+    +"-tapez g si vous voulez voir les moyennes supérieures ou inférieures à une moyenne de référence: ")
+
+    if question == "m":
+        print ("La moyenne générale de de la classe est de "+moyenne_g)
+
+    elif question == "k":
+        print (dico_classe)
+
+    elif question == "z":
+        for cle, valeur in dico_classe.items():
+            moyenne_everyone = sum(dico_classe[cle]["maths"]) + sum(dico_classe[cle]["fr"]) + sum(dico_classe[cle]["hist"])
+            print(cle+ " :" , moyenne_everyone/15)
+
+    elif question == "a":
+        question = input ("Voici les 10 élèves, choisissez celui que vous voulez,\n"\
+        +"attention à l'orthographe et aux majuscules!!!\n"\
+        +"Victor, Nour, Alexandre, Lina, Guillaume, Anna, Daniel, Louise, Mathilde, Claire: ")
+
+        if question == "Victor":
+            print ("Les moyennes de Victor sont " +str(moyenne_Victor1)+" en maths,"+"  "  \
+            +str(moyenne_Victor2)+" en français et"+"  "  +str(moyenne_Victor3)+" en histoire.")
+
+        elif question == "Nour":
+            print ("Les moyennes de Nour sont " +str(moyenne_Nour1)+" en maths,"+"  "  +str(moyenne_Nour2)\
+            +" en français et"+"  "  +str(moyenne_Nour3)+" en histoire.")
+
+        elif question == "Alexandre":
+            print ("Les moyennes de Alexandre sont " +str(moyenne_Alexandre1)+" en maths,"+"  "  \
+            +str(moyenne_Alexandre2)+" en français et"+"  "  +str(moyenne_Alexandre3)+" en histoire.")
+
+        elif question == "Lina":
+            print ("Les moyennes de Lina sont " +str(moyenne_Lina1)+" en maths,"+"  "  +str(moyenne_Lina2)\
+            +" en français et"+"  "  +str(moyenne_Lina3)+" en histoire.")
+
+        elif question == "Guillaume":
+            print ("Les moyennes de Guillaume sont " +str(moyenne_Guillaume1)+" en maths,"+"  "  \
+            +str(moyenne_Guillaume2)+" en français et"+"  "  +str(moyenne_Guillaume3)+" en histoire.")
+
+        elif question == "Anna":
+            print ("Les moyennes de Anna sont " +str(moyenne_Anna1)+" en maths,"+"  "  +str(moyenne_Anna2)\
+            +" en français et"+"  "  +str(moyenne_Anna3)+" en histoire.")
+
+        elif question == "Daniel":
+            print ("Les moyennes de Daniel sont " +str(moyenne_Daniel1)+" en maths,"+"  "  \
+            +str(moyenne_Daniel2)+" en français et"+"  "  +str(moyenne_Daniel3)+" en histoire.")
+
+        elif question == "Louise":
+            print ("Les moyennes de Louise sont " +str(moyenne_Louise1)+" en maths,"+"  "  \
+            +str(moyenne_Louise2)+" en français et"+"  "  +str(moyenne_Louise3)+" en histoire.")
+
+        elif question == "Mathilde":
+            print ("Les moyennes de Mathilde sont " +str(moyenne_Mathilde1)+" en maths,"+"  "  \
+            +str(moyenne_Mathilde2)+" en français et"+"  "  +str(moyenne_Mathilde3)+" en histoire.")
+
+        elif question == "Claire":
+            print ("Les moyennes de Claire sont " +str(moyenne_Claire1)+" en maths,"+"  "  \
+            +str(moyenne_Claire2)+" en français et"+"  "  +str(moyenne_Claire3)+" en histoire.")
+
+
+
+    elif question == "b":
+        print ("La moyenne de la classe en maths est " + str(moyenne_maths))
+        print ("La moyenne de la classe en français est " + str(moyenne_fr))
+        print ("La moyenne de la classe en histoire est " + str(moyenne_hist))
+
+    elif question == "g":
+        i=0
+        dec_chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
+        reponse = 1
+        while reponse == 1:
+            question = input ("Quelle est la moyenne de référence? Donnez un nombre décimal positif \n"\
+            +"!!!pas de virgule, juste des nombres et des points!!! ")
+            for w in question:
+                if w not in dec_chars:
+                    print ("Erreur")
+                elif w in dec_chars:
+                    reponse = 2
+        if reponse == 2:
+            while i<10:
+                for cle, valeur in dico_classe.items():
+                    moyenne_everyone = sum(dico_classe[cle]["maths"]) + sum(dico_classe[cle]["fr"]) + sum(dico_classe[cle]["hist"])
+                    moyenne = float (moyenne_everyone/15)
+
+                    if moyenne > float (question):
+                        print ("La moyenne de "+ cle + " est supérieure à " + question)
+                        i=i+1
+                    elif moyenne < float (question):
+                        print ("La moyenne de "+ cle + " est inférieure à " + question)
+                        i=i+1
+                    elif moyenne == float (question):
+                        print ("La moyenne de "+ cle + " est égale à " + question)
+                        i=i+1
+
+if question == "q":
+    print ("Merci de votre passage, si vous changez d'avis, relancez le programme.")
+
+
+#FIN DU PROGRAMME
