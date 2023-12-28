@@ -1,0 +1,53 @@
+{
+   "Williams": {
+      "compte": 73564.0,
+      "historique": [
+         "2022/12/01 depot de 1243 euros"
+      ]
+   },
+   "Sy": {
+      "compte": 617439.0,
+      "historique": [
+         "2022/11/30 retrait de 2636 euros"
+      ]
+   },
+   "Diana": {
+      "compte": 863127.0,
+      "historique": [
+         "2022/12/01 depot de 4362 euros"
+      ]
+   },
+   "Reeves": {
+      "compte": 136583,
+      "historique": []
+   },
+   "Watson": {
+      "compte": 624951,
+      "historique": [
+         "2022/11/28 retrait de 10 euros",
+         "2022/11/28 retrait de 10 euros",
+         "2022/11/29 retrait de 287 euros",
+         "2022/11/30 depot de 1 euros"
+      ]
+   },
+   "Zidane": {
+      "compte": 620075,
+      "historique": []
+   },
+   "Cranston": {
+      "compte": 259856,
+      "historique": []
+   },
+   "Veil": {
+      "compte": 146919,
+      "historique": []
+   },
+   "Rudd": {
+      "compte": 617807,
+      "historique": []
+   },
+   "Rinner": {
+      "compte": 726636,
+      "historique": []
+   }
+}
